@@ -1,5 +1,0 @@
-<test name="Users">
-    <packages>
-        <package name="e2e.tests.users"/>
-    </packages>
-</test>

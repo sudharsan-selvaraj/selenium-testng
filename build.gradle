@@ -1,21 +1,48 @@
-plugins {
-    id 'java'
-}
-
-group 'com.sudharsan.automation'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
+group "com.testninja.selenium"
+apply plugin: "java"
 
 repositories {
     mavenCentral()
+    jcenter()
+    maven {
+        url 'https://dl.bintray.com/epam/reportportal'
+    }
+    maven {
+        url "https://jitpack.io"
+    }
+    maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.testninja.selenium.TestEntry'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+build {
+    fatJar
+}
+
+clean.doFirst {
+    delete "result"
+    delete "rp_logs"
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-
-    compile group: 'org.testng', name: 'testng', version: '7.0.0'
-    compile group: 'com.aventstack', name: 'extentreports', version: '4.0.0'
-
     compile group: 'com.beust', name: 'jcommander', version: '1.78'
+    compile group: 'org.testng', name: 'testng', version: '7.1.0'
+    compile (group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59')
+    compile group: 'commons-io', name: 'commons-io', version: '2.4'
+    compile group: 'com.aventstack', name: 'extentreports', version: '4.1.1'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.4'
+    compile group: 'com.paulhammant', name: 'ngwebdriver', version: '1.1.4'
+    compile "com.squareup.retrofit2:retrofit:2.7.1"
+    compile 'com.epam.reportportal:commons-model:5.0.0'
+    compile 'com.epam.reportportal:client-java:5.0.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile group: 'com.github.webdriverextensions', name: 'webdriverextensions', version: '3.11.2'
 }

@@ -1,5 +1,0 @@
-<test name="datasets" >
-    <packages>
-        <package name="e2e.tests.datasets"/>
-    </packages>
-</test>

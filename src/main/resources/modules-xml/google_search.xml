@@ -1,0 +1,7 @@
+<tests>
+    <test name="Google Search">
+        <packages>
+            <package name="com.testninja.selenium.tests.google.*"/>
+        </packages>
+    </test>
+</tests>
