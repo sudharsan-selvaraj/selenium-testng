@@ -1,6 +1,7 @@
-package com.testninja.selenium.pom.pages;
+package com.testninja.selenium.pom.google.pages;
 
 import com.testninja.selenium.ScriptHelper;
+import com.testninja.selenium.framework.pageobject.BaseWebComponent;
 import com.testninja.selenium.pom.wrappers.BasePage;
 import com.testninja.selenium.pom.wrappers.PageDetails;
 import org.openqa.selenium.WebElement;

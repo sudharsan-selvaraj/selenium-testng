@@ -11,6 +11,7 @@ import com.testninja.selenium.framework.report.SeleniumReport;
 import com.testninja.selenium.framework.report.TestCaseDetails;
 import com.testninja.selenium.framework.report.TestMethodDetails;
 import com.testninja.selenium.framework.testrunner.TestClassInfoProvider;
+import com.testninja.selenium.utils.Interactions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntry;
 import org.slf4j.Logger;
@@ -26,10 +27,13 @@ import java.util.stream.Collectors;
 
 public class BaseTest extends TestManager {
 
-    protected WebDriver driver;
-    protected SeleniumReport report;
     protected ApplicationParameters parameters;
+    protected WebDriver driver;
+
+    protected SeleniumReport report;
+    protected Interactions interactions;
     protected ScriptHelper scriptHelper;
+
     protected TestClassInfoProvider testClassInfoProvider;
     protected ReportContext reportContext;
     protected Map<String, TestMethodDetails> testMethodDetailsList = new HashMap<>();
@@ -55,13 +59,14 @@ public class BaseTest extends TestManager {
     protected void initializeReport(XmlTest context) {
         this.testClassDetails = getTestClassInfoDetails(context);
         report = new SeleniumReport(driver, getReportContext());
+        interactions = new Interactions(driver);
         parameters = Globals.getParameters();
     }
 
     @BeforeClass(alwaysRun = true, dependsOnMethods = {"setup", "initializeReport"})
     protected void initializeScriptHelper(XmlTest context) {
         try {
-            scriptHelper = new ScriptHelper(driver, report, parameters);
+            scriptHelper = new ScriptHelper(driver, report, parameters, interactions);
             report.startTest();
             PageObjectFactory.init(this, Arrays.asList(ScriptHelper.class), Arrays.asList(scriptHelper));
         } catch (Throwable e) {

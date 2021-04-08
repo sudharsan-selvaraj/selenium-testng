@@ -1,6 +1,8 @@
 package com.testninja.selenium.pom.wrappers;
 
+import com.github.webdriverextensions.WebDriverExtensionFieldDecorator;
 import com.testninja.selenium.ScriptHelper;
+import com.testninja.selenium.framework.pageobject.BaseWebComponentFieldDecorator;
 import com.testninja.selenium.framework.pageobject.PageObjectFactory;
 import com.testninja.selenium.framework.parameters.ApplicationParameters;
 import com.testninja.selenium.framework.report.SeleniumReport;
@@ -26,10 +28,10 @@ public class BasePage {
         this.report = scriptHelper.getReport();
         this.driver = scriptHelper.getDriver();
         this.parameters = scriptHelper.getParameters();
+        this.interactions = scriptHelper.getInteractions();
         this.pageDetails = pageDetails;
-        interactions = new Interactions(driver);
 
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(new BaseWebComponentFieldDecorator(scriptHelper), this);
         PageObjectFactory.init(this, Arrays.asList(new Class[]{ScriptHelper.class}), Arrays.asList(new Object[]{scriptHelper}));
     }
 

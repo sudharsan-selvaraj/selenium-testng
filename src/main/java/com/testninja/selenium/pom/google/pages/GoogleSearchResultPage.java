@@ -1,4 +1,4 @@
-package com.testninja.selenium.pom.pages;
+package com.testninja.selenium.pom.google.pages;
 
 import com.testninja.selenium.ScriptHelper;
 import com.testninja.selenium.framework.pageobject.annotations.Page;
