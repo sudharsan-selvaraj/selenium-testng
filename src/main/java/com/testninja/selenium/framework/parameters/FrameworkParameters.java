@@ -19,6 +19,9 @@ public class FrameworkParameters {
     @Parameter(names = {"--threadCount"})
     private Integer threadCount = 10;
 
+    @Parameter(names = {"--angularApp"})
+    private Boolean isAngularApp = false;
+
     @Parameter(names = {"--parallelMode"}, description = "Parallel execution")
     private XmlSuite.ParallelMode parallelMode = XmlSuite.ParallelMode.CLASSES;
 
@@ -83,6 +86,10 @@ public class FrameworkParameters {
 
     public Boolean getReRunTest() {
         return reRunTest;
+    }
+
+    public Boolean getIsAngularApp() {
+        return isAngularApp;
     }
 
     public Boolean getReportPortalScreenShot() {

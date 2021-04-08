@@ -1,6 +1,7 @@
 package com.testninja.selenium.utils;
 
 import com.paulhammant.ngwebdriver.NgWebDriver;
+import com.testninja.selenium.Globals;
 import com.testninja.selenium.framework.pageobject.annotations.PageUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -21,6 +22,7 @@ public class Interactions {
         this.driver = driver;
         ngWebDriver = new NgWebDriver((JavascriptExecutor) driver).withRootSelector("body");
         waitHandler = new WaitHandler(driver);
+        setAngularEnabled(Globals.getParameters().getIsAngularApp());
     }
 
     public void setAngularEnabled(Boolean status) {
